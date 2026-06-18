@@ -40,3 +40,35 @@ Explanation:
 =================================================
 
 """
+def find_words_with_all_vowels(filename="sowpods.txt"):
+    # Define the set of all five vowels
+    vowels = {"a", "e", "i", "o", "u"}
+    match_count = 0
+
+    try:
+        # Open and read the text file line by line
+        with open(filename, "r") as file:
+            for line in file:
+                # Remove whitespace and newlines, then convert to lowercase
+                word = line.strip()
+                word_lower = word.lower()
+
+                # Convert the word to a set of characters
+                word_chars = set(word_lower)
+
+                # Check if all vowels are a subset of the word's characters
+                if vowels.issubset(word_chars):
+                    print(word)
+                    match_count += 1
+
+        # Print the total count of matching words
+        print(f"\nTotal words with all vowels: {match_count}")
+
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+
+
+# Run the function
+if __name__ == "__main__":
+    find_words_with_all_vowels()
+  
