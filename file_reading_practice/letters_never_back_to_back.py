@@ -53,3 +53,33 @@ Sorted -> ['b', 'd', 'e', 'h', 'k', 'm', 'n',
 =================================================
 
 """
+import string
+
+def find_non_repeating_letters(filename="sowpods.txt"):
+    seen_letters = set()
+    doubled_letters = set()
+
+    # Read the file line by line
+    with open(filename, 'r') as file:
+        for line in file:
+            word = line.strip().lower()
+            
+            # Track letters seen and check for consecutive duplicates
+            for i, char in enumerate(word):
+                if char.isalpha():
+                    seen_letters.add(char)
+                    # Check if the next character is the same
+                    if i < len(word) - 1 and char == word[i + 1]:
+                        doubled_letters.add(char)
+
+    # Valid letters = (letters that appear at least once) - (letters that double up)
+    valid_letters = seen_letters - doubled_letters
+    
+    # Sort alphabetically as shown in the example output
+    return sorted(list(valid_letters))
+
+# Execute the function
+if __name__ == "__main__":
+    result = find_non_repeating_letters()
+    print(result)
+   
